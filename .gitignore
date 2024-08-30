@@ -15,3 +15,5 @@ cookbooks/python/openai/hallucination_results.csv
 ./.venv
 ./venv
 **/.venv/
+**/venv/
+./venv
