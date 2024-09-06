@@ -1,0 +1,84 @@
+[
+    {
+        "hotel_information": {
+            "name": "THE MADISON. HAMBURG",
+            "address": "MADISON Hotel GmbH Scharzenweg 4 20459 Hamburg",
+            "contact": {
+                "phone": "+49 40 43 766-0",
+                "fax": "+49 40 37 666-137",
+                "email": "info@madisonhotel.de",
+                "website": "madisonhotel.de"
+            }
+        },
+        "guest_information": {
+            "name": "Herr Jens Walter",
+            "invoice_number": "505050",
+            "arrival_date": "30.06.19",
+            "departure_date": "04.07.19",
+            "room_number": "203",
+            "user_id": "RIL"
+        },
+        "invoice_information": {
+            "date": "04.07.19",
+            "page": "1 of 1"
+        },
+        "charges": [
+            {
+                "date": "30.06.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "netto_eur": 110.0,
+                    "mwst_eur": 28.79,
+                    "brutto_eur": 440.0
+                }
+            },
+            {
+                "date": "01.07.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "netto_eur": 110.0,
+                    "mwst_eur": null,
+                    "brutto_eur": null
+                }
+            },
+            {
+                "date": "02.07.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "netto_eur": 110.0,
+                    "mwst_eur": null,
+                    "brutto_eur": null
+                }
+            },
+            {
+                "date": "03.07.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "netto_eur": 110.0,
+                    "mwst_eur": null,
+                    "brutto_eur": null
+                }
+            },
+            {
+                "date": "04.07.19",
+                "description": "Mastercard IFC",
+                "amount": {
+                    "netto_eur": 440.0,
+                    "mwst_eur": null,
+                    "brutto_eur": null
+                }
+            }
+        ],
+        "total": {
+            "total_netto_eur": 411.21,
+            "total_mwst_eur": 28.79,
+            "total_brutto_eur": 440.0,
+            "saldo": "0.00 EUR"
+        },
+        "payment_information": {
+            "credit_card_number": "XXXXXXXXXXXXXXXXXX5052",
+            "transaction_number": "440.00",
+            "authorization_code": "114540"
+        }
+    }
+]

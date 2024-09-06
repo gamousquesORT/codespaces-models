@@ -23,7 +23,7 @@ response = client.chat.completions.create(
         },
         {
             "role": "user",
-            "content": "What is the capital of France?",
+            "content": "What is the capital of washington?",
         },
     ],
     model=model_name,

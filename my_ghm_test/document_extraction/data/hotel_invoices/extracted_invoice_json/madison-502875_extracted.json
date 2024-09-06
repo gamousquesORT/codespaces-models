@@ -1,0 +1,60 @@
+[
+    {
+        "hotel_information": {
+            "name": "THE MADISON.",
+            "address": "Schaarsteinweg 4, 20459 Hamburg, Germany",
+            "contact": {
+                "phone": "+49.40.37 666-0",
+                "fax": "+49.40.37 666-137",
+                "email": "info@madisonhotel.de",
+                "website": "madisonhotel.de"
+            }
+        },
+        "guest_information": {
+            "name": "Herr Jens Walter",
+            "invoice_number": "502875",
+            "date": "14.06.19"
+        },
+        "invoice_information": {
+            "check_in": "10.06.19",
+            "check_out": "14.06.19",
+            "room_number": "426",
+            "page": "1 of 1",
+            "user_id": "BD"
+        },
+        "charges": [
+            {
+                "date": "10.06.19",
+                "description": "Übernachtung exklusive Frühstück",
+                "amount": 110.0
+            },
+            {
+                "date": "11.06.19",
+                "description": "Übernachtung exklusive Frühstück",
+                "amount": 110.0
+            },
+            {
+                "date": "12.06.19",
+                "description": "Übernachtung exklusive Frühstück",
+                "amount": 110.0
+            },
+            {
+                "date": "13.06.19",
+                "description": "Übernachtung exklusive Frühstück",
+                "amount": 110.0
+            },
+            {
+                "date": "14.06.19",
+                "description": "Mastercard IFC",
+                "amount": 440.0
+            }
+        ],
+        "summary": {
+            "net_amount": 411.21,
+            "tax": 28.79,
+            "total_amount": 440.0,
+            "balance": 0.0
+        }
+    },
+    {}
+]
