@@ -2,7 +2,7 @@ from openai import OpenAI
 import dotenv
 import os
 import io
-from PIL import Image
+from pillow import Image
 import base64
 import json
 
