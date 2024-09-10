@@ -1,0 +1,93 @@
+[
+    {
+        "hotel_information": {
+            "name": "citadines",
+            "address": "Ludwig-Erhard-Str. 7, D-20469 Hamburg, Deutschland",
+            "contact": {
+                "phone": "+49 (0)40-306818",
+                "fax": "+49 (0)40-306818-1999",
+                "email": "hamburg@citadines.com",
+                "website": "www.cladines.com"
+            }
+        },
+        "guest_information": {
+            "name": "Herr Jens Walter",
+            "reservation_number": "12217737070-1",
+            "apartment_number": "420",
+            "apartment_type": "1-Bedroom",
+            "arrival_date": "31/03/2019",
+            "departure_date": "05/04/2019"
+        },
+        "invoice_information": {
+            "invoice_number": "083-72561",
+            "invoice_date": "05/04/19",
+            "time": "09:46",
+            "reference_number": null,
+            "page": "1 von 1"
+        },
+        "charges": [
+            {
+                "date": "31/03/19",
+                "apt_number": "420",
+                "description": "Apartment 31/03/19#420",
+                "amount": 92.56
+            },
+            {
+                "date": "01/04/19",
+                "apt_number": "420",
+                "description": "Apartment 01/04/19#420",
+                "amount": 197.2
+            },
+            {
+                "date": "02/04/19",
+                "apt_number": "420",
+                "description": "Apartment 02/04/19#420",
+                "amount": 254.15
+            },
+            {
+                "date": "03/04/19",
+                "apt_number": "420",
+                "description": "Apartment 03/04/19#420",
+                "amount": 215.9
+            },
+            {
+                "date": "04/04/19",
+                "apt_number": "420",
+                "description": "Apartment 04/04/19#420",
+                "amount": 143.82
+            },
+            {
+                "date": "31/03/19",
+                "apt_number": "420",
+                "description": "Mastercard bnr 8324 SPLIT",
+                "amount": -903.63
+            }
+        ],
+        "summary": {
+            "total_charges": 903.63,
+            "total_payments": -903.63,
+            "open_balance": 0.0
+        },
+        "taxes": [
+            {
+                "rate": "19.00 %",
+                "net_amount": 0.0,
+                "tax_amount": 0.0,
+                "gross_amount": 0.0
+            },
+            {
+                "rate": "7.00 %",
+                "net_amount": 844.51,
+                "tax_amount": 59.12,
+                "gross_amount": 903.63
+            },
+            {
+                "rate": "0.00 %",
+                "net_amount": 0.0,
+                "tax_amount": 0.0,
+                "gross_amount": 0.0
+            }
+        ]
+    },
+    {}
+]

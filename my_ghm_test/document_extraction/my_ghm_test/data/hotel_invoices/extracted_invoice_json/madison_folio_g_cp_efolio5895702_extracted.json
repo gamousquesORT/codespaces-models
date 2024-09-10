@@ -1,0 +1,81 @@
+[
+    {
+        "hotel_information": {
+            "name": "MADISON Hotel GmbH",
+            "address": "Scharsteinweg 4, 20459 Hamburg",
+            "contact": {
+                "phone": "+49.40.37 666-0",
+                "fax": "+49.40.37 666-137",
+                "email": "info@madisonhotel.de"
+            }
+        },
+        "guest_information": {
+            "name": "Herr Jens Walter"
+        },
+        "invoice_information": {
+            "invoice_number": "505050",
+            "date": "04.07.19",
+            "room_number": "203",
+            "check_in_date": "30.06.19",
+            "check_out_date": "04.07.19",
+            "page": "1 of 1",
+            "user_id": "RIL"
+        },
+        "charges": [
+            {
+                "date": "30.06.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "debit": 110.0,
+                    "credit": null
+                }
+            },
+            {
+                "date": "01.07.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "debit": 110.0,
+                    "credit": null
+                }
+            },
+            {
+                "date": "02.07.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "debit": 110.0,
+                    "credit": null
+                }
+            },
+            {
+                "date": "03.07.19",
+                "description": "Übernachtung exklusive Frühstück*",
+                "amount": {
+                    "debit": 110.0,
+                    "credit": null
+                }
+            },
+            {
+                "date": "04.07.19",
+                "description": "Bargeld",
+                "amount": {
+                    "debit": 440.0,
+                    "credit": null
+                }
+            }
+        ],
+        "summary": {
+            "net_amount": 411.21,
+            "tax_amount": 28.79,
+            "gross_amount": 440.0,
+            "total": 440.0,
+            "balance": {
+                "amount": 0.0,
+                "currency": "EUR"
+            }
+        },
+        "financial_information": {
+            "bank": "Finanzamt: Hamburg Mitte",
+            "tax_number": "48/741/01228"
+        }
+    }
+]

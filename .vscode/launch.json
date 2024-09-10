@@ -1,6 +1,13 @@
 {
     "configurations": [
         {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Run JavaScript Sample",
             "program": "${file}",
             "cwd": "${fileDirname}",
