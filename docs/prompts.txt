@@ -1,0 +1,100 @@
+write in c# code the following classes : Fabricante that has the following attributes: nombre :string , establecida :DateTime. and two class attributes: numeroDeSerie:long, and Id : long. Write a property for each attribute. Both class attributes need to be incremented by one when a new Pieza object is requested. Pieza that has the following attributes: numeroSerie:long, fabricada:dateTime, nombre:string
+add to the class Fabricante a createPieza class method that create a Pieza object and intializaes it with the numerodeserie value and with a name with the first three digit of the numerodeserie value and the first three letters of the Fabricante nombre attribute
+Add to the Fabricante class a collection where it stores each new created Pieza object
+add to the Pieza class an atribute that refers to the Fabricante class and each tieme a new Pieza is created it has a reference to it Fabrica object
+Create an inerface IElmentoConNombre to that Pieza implements and that has a method to returns the Pieza name
+Create a main method for a program class that create a Fabricante, and asks the Fabricante object to create five Pieza object. Use any Name and date that you want. then wtite a method to iterate thru the Piezas objects using the GetName method
+
+
+Here is the updated code:
+```
+using System;
+using System.Collections.Generic;
+
+public interface IElementoConNombre
+{
+    string GetName();
+}
+
+public class Fabricante
+{
+    private static long _id = 0;
+    private static long _numeroDeSerie = 0;
+
+    public string Nombre { get; set; }
+    public DateTime Establecida { get; set; }
+    public long Id { get; private set; }
+    public long NumeroDeSerie { get; private set; }
+    public List<Pieza> Piezas { get; private set; }
+
+    public Fabricante(string nombre, DateTime establecida)
+    {
+        Nombre = nombre;
+        Establecida = establecida;
+        Id = ++_id;
+        NumeroDeSerie = ++_numeroDeSerie;
+        Piezas = new List<Pieza>();
+    }
+
+    public Pieza CreatePieza()
+    {
+        string piezaNombre = NumeroDeSerie.ToString().Substring(0, 3) + Nombre.Substring(0, 3);
+        Pieza pieza = new Pieza(this, piezaNombre);
+        Piezas.Add(pieza);
+        return pieza;
+    }
+}
+
+public class Pieza : IElementoConNombre
+{
+    public long NumeroSerie { get; set; }
+    public DateTime Fabricada { get; set; }
+    public string Nombre { get; set; }
+    public Fabricante Fabricante { get; set; }
+
+    public Pieza(Fabricante fabricante, string nombre)
+    {
+        NumeroSerie = fabricante.NumeroDeSerie;
+        Fabricada = DateTime.Now;
+        Nombre = nombre;
+        Fabricante = fabricante;
+    }
+
+    public string GetName()
+    {
+        return Nombre;
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Fabricante fabricante = new Fabricante("MyFabricante", new DateTime(2022, 1, 1));
+
+        for (int i = 0; i < 5; i++)
+        {
+            fabricante.CreatePieza();
+        }
+
+        IterateThroughPiezas(fabricante.Piezas);
+    }
+
+    public static void IterateThroughPiezas(List<Pieza> piezas)
+    {
+        foreach (IElementoConNombre elemento in piezas)
+        {
+            Console.WriteLine(elemento.GetName());
+        }
+    }
+}
+```
+Here's what's new:
+
+* I created a `Program` class with a `Main` method, which is the entry point of the program.
+* In the `Main` method, I created a `Fabricante` object with a name and date.
+* I then used a `for` loop to create 5 `Pieza` objects using the `CreatePieza` method of the `Fabricante` object.
+* Finally, I called the `IterateThroughPiezas` method, passing the `Piezas` list of the `Fabricante` object as a parameter.
+* The `IterateThroughPiezas` method iterates through the `Pieza` objects using a `foreach` loop, and prints the name of each `Pieza` object using the `GetName` method.
+
+When you run this program, it will create a `Fabricante` object, create 5 `Pieza` objects, and then print the names of each `Pieza` object to the console.
