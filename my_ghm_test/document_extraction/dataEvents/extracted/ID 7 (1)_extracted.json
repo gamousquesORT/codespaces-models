@@ -1,0 +1,82 @@
+[
+    {
+        "Eventos": [
+            {
+                "Mes": "AGOSTO",
+                "Día": 19,
+                "Evento": "Comienzo de semestre",
+                "Sem": 1
+            },
+            {
+                "Mes": "AGOSTO",
+                "Día": 21,
+                "Evento": "Lectora ODL - Aplicación de esquema",
+                "Sem": 1
+            },
+            {
+                "Mes": "AGOSTO",
+                "Día": 22,
+                "Evento": "Lectora ODL - ¿Qué se debe hacer?",
+                "Sem": 1
+            },
+            {
+                "Mes": "AGOSTO",
+                "Día": 26,
+                "Evento": "Entregas ODL - Aplicación de esquema",
+                "Sem": 2
+            },
+            {
+                "Mes": "AGOSTO",
+                "Día": 27,
+                "Evento": "Entregas ODL - ¿Qué se debe hacer?",
+                "Sem": 2
+            },
+            {
+                "Mes": "AGOSTO",
+                "Día": 30,
+                "Evento": "Primer día de exámenes",
+                "Sem": 3
+            }
+        ]
+    },
+    {
+        "Eventos": [
+            {
+                "Mes": "Enero",
+                "Día": 27,
+                "Evento": "Bla, Bla, Bla",
+                "Sem": ""
+            },
+            {
+                "Mes": "Febrero",
+                "Día": 1,
+                "Evento": "24a. Sesión Extra CBL",
+                "Sem": ""
+            },
+            {
+                "Mes": "Febrero",
+                "Día": 2,
+                "Evento": "24a. Sesión Extra CBL",
+                "Sem": ""
+            },
+            {
+                "Mes": "Febrero",
+                "Día": 3,
+                "Evento": "Día Internacional de la Mujer",
+                "Sem": ""
+            },
+            {
+                "Mes": "Febrero",
+                "Día": 4,
+                "Evento": "24a. Sesión Extra CBL",
+                "Sem": ""
+            }
+        ]
+    },
+    {
+        "Eventos": []
+    },
+    {
+        "Eventos": []
+    }
+]

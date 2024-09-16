@@ -67,27 +67,52 @@ class DocumentDataExtraction:
     
     def extract_invoice_data(self, base64_image):
             system_prompt = f"""
-            You are an OCR-like data extraction tool that extracts hotel invoice data from PDFs.
+            You are an OCR-like data extraction tool that extracts events like data from PDFs tabular data calendar.
         
-            1. Please extract the data in this hotel invoice, grouping data according to theme/sub groups, and then output into JSON.
+            1. Please extract the data in this events table, written in spanish, by grouping data according to "Mes", "Día" and "Evento", and then output into JSON.
 
             2. Please keep the keys and values of the JSON in the original language. 
 
-            3. The type of data you might encounter in the invoice includes but is not limited to: hotel information, guest information, invoice information,
-            room charges, taxes, and total charges etc. 
-
-            4. If the page contains no charge data, please output an empty JSON object and don't make up any data.
-
-            5. If there are blank data fields in the invoice, please include them as "null" values in the JSON object.
+            3. The type of data you might encounter in the table includes but is not limited to a header with: "Mes" like "AGOSTO 2024" , a "descripción" like "Calendario de eventos" or "LAS ENTREGAS ", a Program of Study like "Ingeniería en Sistemas", 
+            REUISITO
             
-            6. If there are tables in the invoice, capture all of the rows and columns in the JSON object. 
-            Even if a column is blank, include it as a key in the JSON object with a null value.
+            4. After the header there is a table with the following columns. "Mes", "Día", "Evento", and "Sem". These columns repeate twice in the table.
+            for each row in the table, the data might include information about "Mes", "día" , "evento" and "Sem". 
+              for example 
+                  a combined cell with "Mes" that is a month that runs across severals
+                  on each row, in the second column the value of "Día". for example 19 
+                  on each row de value of "Evento". for example Comienzo de semestre
+                  on each row de value of "Sem". for example 1 meaning the first week of the semester
+                  
+            following there is a text drawn example of the first week of the semester
+             
+             ----------------------------
+             | Mes | Día | Evento | Sem |
+             |-----|-----|--------|-----|
+             |    | 19  | Comienzo de semestre |  |
+             |    | 20  |                      |  |
+             |A    | 21  |                     | 1 |
+             |G    | 22  |  Examen DA1         |  |
+             |O    | 23  |                     |  |
+             |S    |     |                     |   |
+             |T    | 26  |                     |  |
+             |O    | 27  |                     |  |
+             |     | 28  |                     |  |
+             |     | 29  |                     | 2 |
+             |     | 30  |                     |  |
+             |     |     |                     |  |
+             |S    | 2   |                     |  |
+             |E    | 3   |                     |  |
+             |T    | 4   |                     | 3|
+             |I    | 5   |                     |  |
+             |E    | 6   |                     |  |
+                
+                
+             
             
-            7. If a row is blank denote missing fields with "null" values. 
-            
-            8. Don't interpolate or make up data.
-
-            9. Please maintain the table structure of the charges, i.e. capture all of the rows and columns in the JSON object.
+            5. Don't interpolate or make up data.
+            6. Ignore rows with blank values.
+            7. Please capture all of the rows and columns in the JSON object.
 
             """
             
@@ -102,7 +127,7 @@ class DocumentDataExtraction:
                     {
                         "role": "user",
                         "content": [
-                            {"type": "text", "text": "extract the data in this hotel invoice and output into JSON "},
+                            {"type": "text", "text": "extract the data in calendar of eventos and output into JSON "},
                             {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{base64_image}", "detail": "high"}}
                         ]
                     }
@@ -135,10 +160,6 @@ class DocumentDataExtraction:
     
     def extract(self):
         # Print the current working directory
-        current_directory = os.getcwd()
-        print(f"The current working directory is: {current_directory}")
-        
-        # to save tokens we will only do the first 3 invoices
         for filename in os.listdir(self.path_to_documents)[:3]:
             file_path = os.path.join(self.path_to_documents, filename)
             print(f"Extracting data from {file_path}")

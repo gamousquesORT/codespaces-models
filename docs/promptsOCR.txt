@@ -1,0 +1,51 @@
+    def extract_invoice_data(self, base64_image):
+            system_prompt = f"""
+            You are an OCR-like data extraction tool that extracts events like data from PDFs tabular data calendar.
+        
+            1. Please extract the data in this events table, written in spanish, by grouping data according to "Mes", "Día" and "Evento", and then output into JSON.
+
+            2. Please keep the keys and values of the JSON in the original language. 
+
+            3. The type of data you might encounter in the table includes but is not limited to a header with: "Mes" like "AGOSTO 2024" , a "descripción" like "Calendario de eventos" or "LAS ENTREGAS ", a Program of Study like "Ingeniería en Sistemas", 
+            REUISITO
+            
+            4. After the header there is a table with the following columns. "Mes", "Día", "Evento", and "Sem". These columns repeate twice in the table.
+            for each row in the table, the data might include information about "Mes", "día" , "evento" and "Sem". 
+              for example 
+                  a combined cell with "Mes" that is a month that runs across severals
+                  on each row, in the second column the value of "Día". for example 19 
+                  on each row de value of "Evento". for example Comienzo de semestre
+                  on each row de value of "Sem". for example 1 meaning the first week of the semester
+                  
+            following there is a text drawn example of the first week of the semester
+             
+             ----------------------------
+             | Mes | Día | Evento | Sem |
+             |-----|-----|--------|-----|
+             |    | 19  | Comienzo de semestre |  |
+             |    | 20  |                      |  |
+             |A    | 21  |                     | 1 |
+             |G    | 22  |  Examen DA1         |  |
+             |O    | 23  |                     |  |
+             |S    |     |                     |   |
+             |T    | 26  |                     |  |
+             |O    | 27  |                     |  |
+             |     | 28  |                     |  |
+             |     | 29  |                     | 2 |
+             |     | 30  |                     |  |
+             |     |     |                     |  |
+             |S    | 2   |                     |  |
+             |E    | 3   |                     |  |
+             |T    | 4   |                     | 3|
+             |I    | 5   |                     |  |
+             |E    | 6   |                     |  |
+                
+                
+             
+            
+            5. Don't interpolate or make up data.
+            6. Ignore rows with blank values.
+            7. Please capture all of the rows and columns in the JSON object.
+
+            """
+            

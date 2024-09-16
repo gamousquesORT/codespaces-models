@@ -34,7 +34,7 @@
                 "date": "04/11/2019",
                 "description": "MC '5620'",
                 "cashier_id": "ANPE",
-                "ref_no": "437200",
+                "ref_no": null,
                 "guest_changes": null,
                 "credit": -475.0,
                 "balance": null
@@ -43,7 +43,7 @@
                 "date": "04/11/2019",
                 "description": "GUEST ROOM",
                 "cashier_id": "MACH",
-                "ref_no": "437201",
+                "ref_no": 43720,
                 "guest_changes": null,
                 "credit": 94.05,
                 "balance": null
@@ -52,7 +52,7 @@
                 "date": "04/11/2019",
                 "description": "BREAKFAST",
                 "cashier_id": "MACH",
-                "ref_no": "437361",
+                "ref_no": 43731,
                 "guest_changes": null,
                 "credit": 9.95,
                 "balance": null
@@ -61,7 +61,7 @@
                 "date": "04/11/2019",
                 "description": "GUEST ROOM",
                 "cashier_id": "MACH",
-                "ref_no": "437200",
+                "ref_no": 43720,
                 "guest_changes": null,
                 "credit": 94.05,
                 "balance": null
@@ -70,7 +70,7 @@
                 "date": "05/11/2019",
                 "description": "BREAKFAST",
                 "cashier_id": "MACH",
-                "ref_no": "437361",
+                "ref_no": 43761,
                 "guest_changes": null,
                 "credit": 14.95,
                 "balance": null
@@ -79,7 +79,7 @@
                 "date": "05/11/2019",
                 "description": "GUEST ROOM",
                 "cashier_id": "MACH",
-                "ref_no": "437770",
+                "ref_no": 43770,
                 "guest_changes": null,
                 "credit": 134.05,
                 "balance": null
@@ -88,7 +88,7 @@
                 "date": "05/11/2019",
                 "description": "BREAKFAST",
                 "cashier_id": "MACH",
-                "ref_no": "437770",
+                "ref_no": 43770,
                 "guest_changes": null,
                 "credit": 14.95,
                 "balance": null
@@ -97,7 +97,7 @@
                 "date": "06/11/2019",
                 "description": "GUEST ROOM",
                 "cashier_id": "ANPE",
-                "ref_no": "438200",
+                "ref_no": 43820,
                 "guest_changes": null,
                 "credit": 114.05,
                 "balance": null
@@ -106,16 +106,16 @@
                 "date": "06/11/2019",
                 "description": "BREAKFAST",
                 "cashier_id": "ANPE",
-                "ref_no": "438200",
+                "ref_no": 43820,
                 "guest_changes": null,
-                "credit": 64.95,
+                "credit": 14.95,
                 "balance": null
             },
             {
                 "date": "07/11/2019",
                 "description": "GUEST ROOM",
                 "cashier_id": "MACH",
-                "ref_no": "438216",
+                "ref_no": 43816,
                 "guest_changes": null,
                 "credit": 114.05,
                 "balance": null
@@ -145,10 +145,10 @@
             "invoice_number": "31611",
             "arrival_date": "04/11/2019 19:00",
             "departure_date": "08/11/2019",
-            "audit_number": "10",
             "room_number": "216",
+            "audit_number": "10",
+            "rate_plan": "2G2",
             "folio_number": "12689 A",
-            "cashier_id": "43816",
             "transaction_id": "437200",
             "approval_amount": "€476.00",
             "appr_code": "109423"
@@ -157,6 +157,8 @@
             {
                 "date": "07/11/2019",
                 "description": "BREAKFAST",
+                "cashier_id": "MACH",
+                "ref_no": "438616",
                 "guest_charges": "€4.95",
                 "credit": null,
                 "balance": "€0.00"
@@ -192,8 +194,7 @@
                 "amount": "€476.00"
             }
         ],
-        "total_charges": {
-            "total": "€476.00"
-        }
+        "guest_signature": "null",
+        "note": "Debit related verbiage"
     }
 ]

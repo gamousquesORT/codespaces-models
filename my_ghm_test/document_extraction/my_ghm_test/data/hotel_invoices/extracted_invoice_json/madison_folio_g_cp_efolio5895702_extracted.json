@@ -73,6 +73,14 @@
                 "currency": "EUR"
             }
         },
+        "tax_information": {
+            "tax_rate": "7%",
+            "tax_details": {
+                "net_amount": 411.21,
+                "tax_amount": 28.79,
+                "gross_amount": 440.0
+            }
+        },
         "financial_information": {
             "bank": "Finanzamt: Hamburg Mitte",
             "tax_number": "48/741/01228"

@@ -6,8 +6,8 @@ def main():
 
     current_directory = os.path.dirname(__file__)
 
-    read_path= os.path.join(current_directory, "./data/hotel_invoices/receipts_2019_de_hotel")
-    write_path= os.path.join(current_directory, "./my_ghm_test/data/hotel_invoices/extracted_invoice_json")
+    read_path= os.path.join(current_directory, "./dataEvents/source")
+    write_path= os.path.join(current_directory, "./dataEvents/extracted")
 
     data_extractor = DocumentDataExtraction(read_path, write_path, GPT_MODEL)
     data_extractor.extract()
