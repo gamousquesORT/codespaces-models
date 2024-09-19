@@ -91,7 +91,7 @@ class RagBasedBot:
         context = "\n------\n".join([ fragment.text for fragment in fragments ])
 
         messages = [
-            ChatMessage(role="system", content="You are a helpful assistant that answers some questions with the help of some context data.\n\nHere is the context data:\n\n" + context),
+            ChatMessage(role="system", content="You are a helpful Faculty Assistant that answers some questions with the help of some context data.\n\nHere is the context data:\n\n" + context),
             ChatMessage(role="user", content=prompt)
     
         ]
