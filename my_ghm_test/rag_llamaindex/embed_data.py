@@ -9,12 +9,21 @@ import dotenv
 import chromadb
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core import StorageContext
+from enum import Enum
 
+class Mode(Enum):
+    INGEST = "ingest"
+    RETRIEVE = "retrieve"
+    
+    
 class RagBasedBot:
-    def __init__(self, data_path: str, database_path:str, model: str = "", embedder_model: str = ""):
+    def __init__(self, mode : Mode, data_path: str, database_path:str, model: str = "", embedder_model: str = ""):
         if not os.getenv("GITHUB_TOKEN"):
             raise ValueError("GITHUB_TOKEN is not set")
-
+        
+        if not isinstance(mode, Mode):
+            raise ValueError(f"Invalid mode: {mode}. Expected one of: {[m.value for m in Mode]}")
+        
         self.llm_api_key= os.environ["OPENAI_API_KEY"] = os.getenv("GITHUB_TOKEN")
         self.llm_api_url= os.environ["OPENAI_BASE_URL"] = "https://models.inference.ai.azure.com/"
             
@@ -29,7 +38,12 @@ class RagBasedBot:
         self.db_path = database_path
 
         self._init_models()
-        self._init_vector_store()
+        
+        if mode == Mode.INGEST:
+            self._init_vector_store()
+        elif mode == Mode.RETRIEVE:
+            self._load_vector_store()
+
 
     def _init_models(self):
         self.llm = OpenAI(
@@ -48,8 +62,8 @@ class RagBasedBot:
         
     def _init_vector_store(self):
         self.db_client = chromadb.PersistentClient(path=self.db_path)
-        chroma_collection = self.db_client.get_or_create_collection("quickstart")
-        vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+        self.chroma_collection = self.db_client.get_or_create_collection("quickstart")
+        vector_store = ChromaVectorStore(chroma_collection=self.chroma_collection)
         self.storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
     # usar codigo de ejemplo de aca https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/ChromaIndexDemo.ipynb#scrollTo=9c3a56a5
@@ -57,7 +71,16 @@ class RagBasedBot:
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
         self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=150)
+        self.index.storage_context.persist(persist_dir=self.index_store_path)
              
+ 
+    def _load_vector_store(self):            
+        self.db_client = chromadb.PersistentClient(path=self.db_path)
+        self.chroma_collection = self.db_client.get_or_create_collection("quickstart")
+        vector_store = ChromaVectorStore(chroma_collection=self.chroma_collection)
+        self.storage_context = StorageContext.from_defaults(vector_store=vector_store)
+        self.index = VectorStoreIndex.from_vector_store(vector_store, storage=self.storage_context)
+
     def _retrieve_embeddings_for_prompt(self, prompt: str):
         retriever = self.index.as_retriever()
         fragments = retriever.retrieve(prompt)
@@ -76,23 +99,5 @@ class RagBasedBot:
         response = self.llm.chat(messages)
         return response
 
-def main():
-    
-    current_directory = os.path.dirname(__file__)
-    data_path = os.path.join(current_directory, "./data")
-    index_store_path = os.path.join(current_directory, "./index_store")
-    
-    bot = RagBasedBot(data_path, index_store_path)
-    bot.index_data()
-    
-    while True:
-        prompt = input("/n/nQué pregunta tienes (o Enter para salir): ")
-        if prompt == "":
-            break
-        response = bot.retrieve_answer(prompt)
-        print(response)
-        
 
 
-if __name__ == "__main__":
-    main()
