@@ -52,10 +52,11 @@ class RagBasedBot:
         vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
         self.storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-        
+    # usar codigo de ejemplo de aca https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/ChromaIndexDemo.ipynb#scrollTo=9c3a56a5
+    
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
-        self.index = VectorStoreIndex.from_documents(documents, self.StorageContext, insert_batch_size=150)
+        self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=150)
              
     def _retrieve_embeddings_for_prompt(self, prompt: str):
         retriever = self.index.as_retriever()
@@ -79,8 +80,9 @@ def main():
     
     current_directory = os.path.dirname(__file__)
     data_path = os.path.join(current_directory, "./data")
+    index_store_path = os.path.join(current_directory, "./index_store")
     
-    bot = RagBasedBot(data_path)
+    bot = RagBasedBot(data_path, index_store_path)
     bot.index_data()
     
     while True:
