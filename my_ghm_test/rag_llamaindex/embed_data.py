@@ -71,7 +71,7 @@ class RagBasedBot:
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
         self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=150)
-        self.index.storage_context.persist(persist_dir=self.index_store_path)
+        self.index.storage_context.persist(persist_dir=self.db_path)
              
  
     def _load_vector_store(self):            
