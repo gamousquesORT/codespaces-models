@@ -1,7 +1,8 @@
-from llama_index.llms.openai import OpenAI
+
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.core import Settings
+from llama_index.llms.cohere import Cohere
 from llama_index.core.llms import ChatMessage
 import logging
 import sys, os
@@ -24,7 +25,7 @@ class RagBasedBot:
         if not isinstance(mode, Mode):
             raise ValueError(f"Invalid mode: {mode}. Expected one of: {[m.value for m in Mode]}")
         
-        self.llm_api_key= os.environ["OPENAI_API_KEY"] = os.getenv("GITHUB_TOKEN")
+        self.llm_api_key= os.environ["COHERE_API_KEY"] = os.getenv("GITHUB_TOKEN")
         self.llm_api_url= os.environ["OPENAI_BASE_URL"] = "https://models.inference.ai.azure.com/"
             
         if  model == "":
@@ -46,11 +47,7 @@ class RagBasedBot:
 
 
     def _init_models(self):
-        self.llm = OpenAI(
-            api_key=self.llm_api_key,
-            api_base=self.llm_api_url,
-            model=self.MODEL,
-            )
+        self.llm = Cohere(api_key=self.llm_api_key)
 
         self.embed_model = OpenAIEmbedding(
             model=self.EMBEDDER,
