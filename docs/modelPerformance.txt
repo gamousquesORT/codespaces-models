@@ -1,0 +1,4 @@
+Probados con Azure azure_inference
+cohere cmd r - es lento y no tan inteligente
+Phi-3-small instruct (128k) - rápido pero es bueno infiriendo
+Mistral-nemo - rapido y bueno haciedno inferencia

@@ -19,3 +19,8 @@ https://docs.python.org/es/3/library/sqlite3.html
 
 codespaces 
 https://medium.com/spawn-db/codespaces-with-databases-50fdf3b73d25
+
+
+
+Azure infrence
+https://docs.llamaindex.ai/en/stable/examples/llm/azure_inference/

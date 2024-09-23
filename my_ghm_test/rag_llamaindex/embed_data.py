@@ -2,7 +2,6 @@
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.core import Settings
-from llama_index.llms.cohere import Cohere
 from llama_index.core.llms import ChatMessage
 import logging
 import sys, os
@@ -11,6 +10,7 @@ import chromadb
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core import StorageContext
 from enum import Enum
+from llama_index.llms.azure_inference import AzureAICompletionsModel
 
 class Mode(Enum):
     INGEST = "ingest"
@@ -25,15 +25,19 @@ class RagBasedBot:
         if not isinstance(mode, Mode):
             raise ValueError(f"Invalid mode: {mode}. Expected one of: {[m.value for m in Mode]}")
         
-        self.llm_api_key= os.environ["COHERE_API_KEY"] = os.getenv("GITHUB_TOKEN")
+        self.llm_api_key= os.environ["AZURE_INFERENCE_CREDENTIAL"] = os.getenv("GITHUB_TOKEN")
         self.llm_api_url= os.environ["OPENAI_BASE_URL"] = "https://models.inference.ai.azure.com/"
             
         if  model == "":
             self.MODEL = "gpt-4o-mini"
             self.EMBEDDER = "text-embedding-3-large"
         else:
-            self.MODEL = model
-            self.EMBEDDER = embedder_model
+            if embedder_model == "": 
+                self.MODEL = model
+                self.EMBEDDER = "text-embedding-3-large"
+            else:
+                self.MODEL = model
+                self.EMBEDDER = embedder_model
 
         self.path_to_documents = data_path
         self.db_path = database_path
@@ -47,8 +51,7 @@ class RagBasedBot:
 
 
     def _init_models(self):
-        self.llm = Cohere(api_key=self.llm_api_key)
-
+        self.llm = AzureAICompletionsModel(endpoint=self.llm_api_url, credential=self.llm_api_key, model_name=self.MODEL,)                                           
         self.embed_model = OpenAIEmbedding(
             model=self.EMBEDDER,
             api_key=self.llm_api_key,
