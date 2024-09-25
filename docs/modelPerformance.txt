@@ -3,5 +3,6 @@ cohere cmd r - es lento y no tan inteligente
 Phi-3-small instruct (128k) - rápido pero es bueno infiriendo
 Mistral-nemo - rapido y bueno haciedno inferencia, pero escribe solo en ingles
 Mistral-large - lento y no tan bueno haciendo inferencias, mezcla español e ingles en las respuestas
-meta-llama-3.1-70b-instruct
+meta-llama-3.1-70b-instruct - lento, medio infiriendo, hay que ser muy preciso al hacer preguntas
 
+gpt-4o-mini
