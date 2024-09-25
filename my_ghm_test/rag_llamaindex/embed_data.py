@@ -102,7 +102,7 @@ class RagBasedBot:
         ]
 
         response = self.llm.chat(messages)
-        return response
+        return response.message.content
 
 
 
