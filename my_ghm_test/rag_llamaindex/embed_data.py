@@ -15,6 +15,7 @@ from llama_index.llms.azure_inference import AzureAICompletionsModel
 class Mode(Enum):
     INGEST = "ingest"
     RETRIEVE = "retrieve"
+    CLEANUP = "cleanup"
     
     
 class RagBasedBot:
@@ -41,13 +42,14 @@ class RagBasedBot:
 
         self.path_to_documents = data_path
         self.db_path = database_path
-
         self._init_models()
-        
         if mode == Mode.INGEST:
             self._init_vector_store()
         elif mode == Mode.RETRIEVE:
             self._load_vector_store()
+        elif mode == Mode.CLEANUP:
+            self._delete_embeddings()
+            
 
 
     def _init_models(self):
@@ -67,7 +69,10 @@ class RagBasedBot:
         self.storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
     # usar codigo de ejemplo de aca https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/ChromaIndexDemo.ipynb#scrollTo=9c3a56a5
-    
+    def _delete_embeddings(self):
+        self.db_client = chromadb.PersistentClient(path=self.db_path)
+        self.db_client.delete_collection("quickstart")
+        
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
         self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=150)

@@ -1,0 +1,27 @@
+
+
+Bibliografía
+Lecturas Obligatorias
+
+Beck Kent (2003). Test Driven Development: By Example. Boston: Addison-Wesley Professional. (Capítulos 1 al 19)
+
+Martin Robert C. (2009). Clean Code: A Handbook of Agile Software Craftsmanship.  Upper Saddle River, NJ: Prentice Hall. (Capítulos 1 al 12)
+
+REFERENCIA
+Ambler Scott W. (2006). The Elements of UML 2.0 Style. Cambridge : Cambridge University Press https://www.agilemodeling.com/
+
+Hamilton, K. Russel, M. (2006) Learning UML 2.0, O’Reilly
+
+Gamma Erich, et. al. (1995). Design Patterns, Elements of Reusable Object-Oriented Software. Massachusetts : Addison Wesley Longman. (GoF). Los patrones cubiertos en el curso
+
+
+Para quién quiera profundizar
+
+Martin Robert C. (2018) Clean Architecture: A  CRAFTSMAN’S GUIDE TO SOFTWARE STRUCTURE AND DESIGN.  Parte III.
+
+Fowler Martin (2019). Refactoring: Improving the Design of existing code. 2ed. Reading MA: Addison Wesley Longman. (Capítulos 1 a 4)
+
+
+
+Martin Robert Cecil (2006). Agile Software Development Principles, Patterns, and Practices in C#. Nueva Jersey : Prentice-Hall.
+
