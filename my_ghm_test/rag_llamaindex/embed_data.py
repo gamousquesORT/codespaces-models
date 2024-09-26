@@ -20,8 +20,11 @@ class Mode(Enum):
     
     
 class RagBasedBot:
-    def __init__(self, mode : Mode, data_path: str, database_path:str, model:Model):
-        self.model = model
+    query_model = None
+    embedding_model = None
+    def __init__(self, mode : Mode, data_path: str, database_path:str, model_for_query:Model, model_for_embedding:Model):
+        self.query_model = model_for_query
+        self.embedding_model = model_for_embedding
         
         try:
             if not isinstance(mode, Mode):
@@ -29,7 +32,8 @@ class RagBasedBot:
             
             self.path_to_documents = data_path
             self.db_path = database_path
-            self.model.init_models()
+            self.query_model.init_models()
+            self.embedding_model.init_models()
         
             if mode == Mode.INGEST:
                 self._init_vector_store()
@@ -84,7 +88,7 @@ class RagBasedBot:
     
         ]
 
-        response = self.model.llm.chat(messages)
+        response = self.query_model.llm.chat(messages)
         return response.message.content
 
 
