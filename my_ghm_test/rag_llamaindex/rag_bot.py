@@ -1,4 +1,5 @@
 from embed_data import RagBasedBot, Mode
+from model_data import Model, ModelRole
 import os
 import gradio as gr
 
@@ -19,7 +20,9 @@ def main():
     current_directory = os.path.dirname(__file__)
     data_path = os.path.join(current_directory, "./data")
     data_base_path = os.path.join(current_directory, "./index_store")
-    bot = RagBasedBot(Mode.RETRIEVE, data_path, data_base_path,"gpt-4o")
+    
+    model = Model(ModelRole.QUERY, "gpt-4o")
+    bot = RagBasedBot(mode=Mode.RETRIEVE, data_path=data_path, database_path=data_base_path, model=model)
 
     #while True:
     #    prompt = input("/n/nQué pregunta tienes (o Enter para salir): ")
