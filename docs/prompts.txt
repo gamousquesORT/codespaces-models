@@ -98,3 +98,9 @@ Here's what's new:
 * The `IterateThroughPiezas` method iterates through the `Pieza` objects using a `foreach` loop, and prints the name of each `Pieza` object using the `GetName` method.
 
 When you run this program, it will create a `Fabricante` object, create 5 `Pieza` objects, and then print the names of each `Pieza` object to the console.
+
+
+
+--
+you are an expert software developer instructor 
+please generate 5 C# code snippets to help students identify clean code improvements on variable names and error handling with exceptions
