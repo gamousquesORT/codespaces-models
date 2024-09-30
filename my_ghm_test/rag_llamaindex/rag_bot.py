@@ -1,5 +1,5 @@
-from embed_data import RagBasedBot, Mode
-from model_data import Model, EmbedderModel, ModelRole
+from embed_and_query import RagBasedBot, Mode
+from model_data import Model, EmbedderModelOpenAI, ModelRole
 import os
 import gradio as gr
 
@@ -22,7 +22,7 @@ def main():
     data_base_path = os.path.join(current_directory, "./index_store")
     
     query_model = Model(ModelRole.QUERY, "gpt-4o")
-    embedding_model = EmbedderModel(model="text-embedding-3-large")
+    embedding_model = EmbedderModelOpenAI(model="text-embedding-3-large")
     bot = RagBasedBot(mode=Mode.RETRIEVE, data_path=data_path, database_path=data_base_path, model_for_query=query_model, model_for_embedding=embedding_model)
 
     #while True:

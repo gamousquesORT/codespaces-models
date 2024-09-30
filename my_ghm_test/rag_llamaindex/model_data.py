@@ -3,7 +3,10 @@ import sys, os
 from llama_index.llms.azure_inference import AzureAICompletionsModel
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
+
+
 import dotenv
+
 
 class ModelRole(Enum):
     QUERY = "Query"
@@ -32,8 +35,9 @@ class Model:
         Settings.llm = self.llm
 
 
-class EmbedderModel(Model):
+class EmbedderModelOpenAI(Model):
     embed_model = None
+    
     def __init__(self, model: str = ""):
         super().__init__(ModelRole.EMBED, model)             
         self.llm_api_key = os.environ["AZURE_INFERENCE_CREDENTIAL"] = os.getenv("GITHUB_TOKEN")
@@ -42,9 +46,6 @@ class EmbedderModel(Model):
 
     def init_models(self):
         self.embed_model = OpenAIEmbedding(
-            model=self.model,
-            api_key= super().llm_api_key,
-            api_base= super().llm_api_url,
-            )
+            api_key=self.llm_api_key,api_base=self.llm_api_url, model=self.model)
         Settings.embed_model = self.embed_model
 
