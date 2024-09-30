@@ -49,3 +49,20 @@ class EmbedderModelOpenAI(Model):
             api_key=self.llm_api_key,api_base=self.llm_api_url, model=self.model)
         Settings.embed_model = self.embed_model
 
+class EmbedderModelOpenAI(Model):
+    embed_model = None
+    
+    def __init__(self, model: str = ""):
+        super().__init__(ModelRole.EMBED, model)             
+        self.llm_api_key = os.environ["AZURE_INFERENCE_CREDENTIAL"] = os.getenv("GITHUB_TOKEN")
+        self.llm_api_url= os.environ["OPENAI_BASE_URL"] = "https://models.inference.ai.azure.com/"
+        self.model = model
+
+    def init_models(self):
+        self.embed_model = OpenAIEmbedding(
+            api_key=self.llm_api_key,api_base=self.llm_api_url, model=self.model)
+        Settings.embed_model = self.embed_model
+
+from azure.ai.inference import EmbeddingsClient
+from azure.core.credentials import AzureKeyCredential
+

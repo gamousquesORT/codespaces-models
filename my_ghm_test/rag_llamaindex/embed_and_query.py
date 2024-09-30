@@ -65,11 +65,8 @@ class RagBasedBot:
     # usar codigo de ejemplo de aca https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/ChromaIndexDemo.ipynb#scrollTo=9c3a56a5
     def _delete_embeddings(self):
         self.db_client = chromadb.PersistentClient(path=self.db_path)
-        count_to_delete = chromadb.Collection.count()
         self.db_client.delete_collection("quickstart")
-        deleted_count = chromadb.Collection.count()
-        if deleted_count == count_to_delete:
-            print(f"Deleted {deleted_count} embeddings")
+
         
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
@@ -77,9 +74,12 @@ class RagBasedBot:
         self.index.storage_context.persist(persist_dir=self.db_path)
              
  
-    def _load_vector_store(self):            
-        self._init_vector_store()
-        self.index = VectorStoreIndex.from_vector_store(vector_store, storage=self.storage_context)
+    def _load_vector_store(self):
+        self.db_client = chromadb.PersistentClient(path=self.db_path)
+        self.chroma_collection = self.db_client.get_or_create_collection("quickstart")
+        vector_store = ChromaVectorStore(chroma_collection=self.chroma_collection)
+        self.storage_context = StorageContext.from_defaults(vector_store=vector_store)
+        self.index = VectorStoreIndex.from_vector_store(vector_store, storage=self.storage_context)            
 
     def _retrieve_embeddings_for_prompt(self, prompt: str):
         retriever = self.index.as_retriever()
