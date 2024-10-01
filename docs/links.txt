@@ -3,9 +3,11 @@ problema con SQLlite y chroma
 https://gist.github.com/defulmere/8b9695e415a44271061cc8e272f3c300
 https://docs.llamaindex.ai/en/stable/module_guides/indexing/vector_store_index/
 
+
+
 uso de choma persistente con sqlite
 https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/ChromaIndexDemo.ipynb
-
+https://www.geeksforgeeks.org/python-sqlite/
 
 https://www.trychroma.com/
 https://stephencollins.tech/posts/how-to-use-sqLite-to-store-and-query-vector-embeddings
