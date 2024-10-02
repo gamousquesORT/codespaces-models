@@ -91,13 +91,15 @@ class RagBasedBot:
         context = "\n------\n".join([ fragment.text for fragment in fragments ])
 
         messages = [
-            ChatMessage(role="system", content="You are a helpful Faculty Assistant that answers some questions with the help of some context data.\n\nHere is the context data:\n\n" + context),
+            ChatMessage(role="system", content="Tú eres Tab el amable asistente de los docentes de la cátedra de ingeniería de software, la cual es parte de la facultad de ingeniería. Conoces los procedimientos y reglamentos de la facultad y de la cátedra, manejas información sobre materias, sobre la utilización de documentos del tipo, plantillas o templates y todo lo que los docentes necesitan para hacer su trabajo.  Trata de responder las preguntas con la mayor precisión posible. Si no sabes la respuesta, contesta que no tienes información para responder. Utiliza como contexto para elaborar la respuesta los siguientes datos: " + context),
             ChatMessage(role="user", content=prompt)
     
         ]
 
-        response = self.query_model.llm.chat(messages)
-        return response.message.content
+        response = Settings.llm.chat(messages)
+        print("**\n\n")
+        print(response)
+        return response.__str__()
 
 
 

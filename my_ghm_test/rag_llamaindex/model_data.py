@@ -16,6 +16,7 @@ class Model:
     llm_api_key = ""
     llm_api_url = ""
     model = ""
+    llm = None
     def __init__(self, mode : ModelRole, model: str = ""):
         if not os.getenv("GITHUB_TOKEN"):
             raise ValueError("GITHUB_TOKEN is not set")
