@@ -13,6 +13,9 @@ from llama_index.core import StorageContext
 from enum import Enum
 from llama_index.llms.azure_inference import AzureAICompletionsModel
 
+
+
+
 class Mode(Enum):
     INGEST = "ingest"
     RETRIEVE = "retrieve"
@@ -98,8 +101,6 @@ class RagBasedBot:
 
         self.query_model.llm
         response = Settings.llm.chat(messages)
-        print("**\n\n")
-        print(response)
         return response.__str__()
 
 

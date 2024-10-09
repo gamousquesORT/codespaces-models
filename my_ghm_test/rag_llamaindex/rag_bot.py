@@ -24,13 +24,18 @@ def main():
     query_model = Model(ModelRole.QUERY, "gpt-4o-mini")
     embedding_model = EmbedderModelOpenAI(model="text-embedding-3-large")
     bot = RagBasedBot(mode=Mode.RETRIEVE, data_path=data_path, database_path=data_base_path, model_for_query=query_model, model_for_embedding=embedding_model)
-
+    bot.query_model.reset_token_counts()
+    bot.embedding_model.reset_token_counts()
+    
     while True:
-        prompt = input("/n/nQué pregunta tienes (o Enter para salir): ")
+        prompt = input("\n\nQué pregunta tienes (o Enter para salir): ")
         if prompt == "":
             break
         response = bot.retrieve_answer(prompt)
         print(response)
+        print("\n")
+        print("Prompt tokens: ", bot.query_model.get_token_count())
+        print("\n Embedding tokens: ", bot.embedding_model.get_token_count())
         
         
     #ui = gr.ChatInterface(fn=ask, textbox=gr.Textbox(placeholder="Soy <Tag> y puedes preguntar sobre reglamentos y procedimientos de la facultad, asi como también sobre las materias de Diseño de Aplicaciones 1 y Fundamentos de ingeniería", container=True, max_lines=10), title="Tag - el chatbot de la cátedra de IngSoft",

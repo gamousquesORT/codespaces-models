@@ -31,3 +31,10 @@ https://docs.llamaindex.ai/en/stable/examples/llm/azure_inference/
 RAG examples and tokenizer
 https://mobiarch.wordpress.com/2024/03/09/rag-using-llamaindex-and-hugging-face-models/
 https://christophergs.com/blog/ai-engineering-retrieval-augmented-generation-rag-llama-index
+
+
+
+tokeinizer examples
+https://docs.llamaindex.ai/en/stable/examples/observability/TokenCountingHandler/
+https://github.com/openai/tiktoken/tree/main
+https://platform.openai.com/docs/guides/embeddings/use-cases#expander-6
