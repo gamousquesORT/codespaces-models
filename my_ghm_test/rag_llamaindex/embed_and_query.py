@@ -96,6 +96,7 @@ class RagBasedBot:
     
         ]
 
+        self.query_model.llm
         response = Settings.llm.chat(messages)
         print("**\n\n")
         print(response)

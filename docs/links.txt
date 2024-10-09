@@ -26,3 +26,8 @@ https://medium.com/spawn-db/codespaces-with-databases-50fdf3b73d25
 
 Azure infrence
 https://docs.llamaindex.ai/en/stable/examples/llm/azure_inference/
+
+
+RAG examples and tokenizer
+https://mobiarch.wordpress.com/2024/03/09/rag-using-llamaindex-and-hugging-face-models/
+https://christophergs.com/blog/ai-engineering-retrieval-augmented-generation-rag-llama-index

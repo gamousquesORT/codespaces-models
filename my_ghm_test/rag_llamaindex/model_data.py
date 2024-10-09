@@ -17,7 +17,8 @@ class Model:
     llm_api_url = ""
     model = ""
     llm = None
-    def __init__(self, mode : ModelRole, model: str = ""):
+    temperature : float = 0.0
+    def __init__(self, mode : ModelRole, model: str = "", temperature: float = 0.0):
         if not os.getenv("GITHUB_TOKEN"):
             raise ValueError("GITHUB_TOKEN is not set")
         
@@ -50,6 +51,7 @@ class EmbedderModelOpenAI(Model):
             api_key=self.llm_api_key,api_base=self.llm_api_url, model=self.model)
         Settings.embed_model = self.embed_model
 
+import tiktoken
 class EmbedderModelOpenAI(Model):
     embed_model = None
     
@@ -63,6 +65,7 @@ class EmbedderModelOpenAI(Model):
         self.embed_model = OpenAIEmbedding(
             api_key=self.llm_api_key,api_base=self.llm_api_url, model=self.model)
         Settings.embed_model = self.embed_model
+        Settings.tokenizer = tiktoken.encoding_for_model(self.model)
 
 from azure.ai.inference import EmbeddingsClient
 from azure.core.credentials import AzureKeyCredential
