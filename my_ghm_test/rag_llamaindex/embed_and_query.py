@@ -2,21 +2,19 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.core import Settings
 from llama_index.core.llms import ChatMessage
-from model_data import Model
-
-import logging
-import sys
-
-import chromadb
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core import StorageContext
 from enum import Enum
 from llama_index.llms.azure_inference import AzureAICompletionsModel
 
+import chromadb
 
+import logging
+import sys
 
+from model_data import Model
 
-class Mode(Enum):
+class OperationMode(Enum):
     INGEST = "ingest"
     RETRIEVE = "retrieve"
     CLEANUP = "cleanup"
@@ -26,18 +24,18 @@ class RagBasedBot:
     query_model = None
     embedding_model = None
     db_client = None
-    def __init__(self, mode : Mode, data_path: str, database_path:str, model_for_query:Model = None, model_for_embedding:Model = None):
+    def __init__(self, mode : OperationMode, data_path: str, database_path:str, model_for_query:Model = None, model_for_embedding:Model = None):
         self.query_model = model_for_query
         self.embedding_model = model_for_embedding
         
         try:
-            if not isinstance(mode, Mode):
-                raise ValueError(f"Invalid mode: {mode}. Expected one of: {[m.value for m in Mode]}")
+            if not isinstance(mode, OperationMode):
+                raise ValueError(f"Invalid mode: {mode}. Expected one of: {[m.value for m in OperationMode]}")
             
             self.path_to_documents = data_path
             self.db_path = database_path
             
-            if self.query_model != None and mode == Mode.RETRIEVE:
+            if self.query_model != None and mode == OperationMode.RETRIEVE:
                 self.query_model.init_models()
             
             if self.embedding_model == None:
@@ -45,11 +43,11 @@ class RagBasedBot:
             else:  
                 self.embedding_model.init_models()
         
-            if mode == Mode.INGEST:
+            if mode == OperationMode.INGEST:
                 self._init_vector_store()
-            elif mode == Mode.RETRIEVE:
+            elif mode == OperationMode.RETRIEVE:
                 self._load_vector_store()
-            elif mode == Mode.CLEANUP:
+            elif mode == OperationMode.CLEANUP:
                 self._delete_embeddings()
         except ValueError as e:
             logging.error(e)
@@ -73,6 +71,10 @@ class RagBasedBot:
         
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
+        
+        #add a parameter with the metadata provider and populate the metadata
+        #******
+        
         self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=150)
         self.index.storage_context.persist(persist_dir=self.db_path)
              
