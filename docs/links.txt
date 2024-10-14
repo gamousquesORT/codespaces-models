@@ -38,3 +38,8 @@ tokeinizer examples
 https://docs.llamaindex.ai/en/stable/examples/observability/TokenCountingHandler/
 https://github.com/openai/tiktoken/tree/main
 https://platform.openai.com/docs/guides/embeddings/use-cases#expander-6
+
+
+sqlite
+https://www.freecodecamp.org/news/work-with-sqlite-in-python-handbook/
+https://www.sqlite.org/datatype3.html

@@ -1,6 +1,6 @@
 from embed_and_query import RagBasedBot, OperationMode
-import os
 from model_data import EmbedderModelOpenAI
+import os
 
 def main():
     
