@@ -11,9 +11,9 @@ import chromadb
 
 import logging
 import sys
-
+from typing import List, Dict, Any
 from model_data import Model
-
+from populate_metadata_sqlite import read_metadata_from_db
 class OperationMode(Enum):
     INGEST = "ingest"
     RETRIEVE = "retrieve"
@@ -24,6 +24,9 @@ class RagBasedBot:
     query_model = None
     embedding_model = None
     db_client = None
+    path_to_documents = None
+    metadata_dict = None
+    
     def __init__(self, mode : OperationMode, data_path: str, database_path:str, model_for_query:Model = None, model_for_embedding:Model = None):
         self.query_model = model_for_query
         self.embedding_model = model_for_embedding
@@ -68,15 +71,23 @@ class RagBasedBot:
         self.db_client = chromadb.PersistentClient(path=self.db_path)
         self.db_client.delete_collection("quickstart")
 
-        
+    def get_metadata(self, file_path:str):
+        if file_path in self.metadata_dict:
+            return self.metadata_dict[file_path]
+        else:
+            return None
+    
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
         
+        self.metadata_dict = read_metadata_from_db()
+        for doc in documents:
+            doc.metadata = self.get_metadata(doc.text)
         #add a parameter with the metadata provider and populate the metadata
         #******
-        add_metadata_to_index(documents)
         
-        self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=150)
+        
+        self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=250)
         self.index.storage_context.persist(persist_dir=self.db_path)
              
  

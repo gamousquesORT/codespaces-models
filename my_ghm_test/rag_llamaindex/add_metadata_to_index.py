@@ -2,6 +2,7 @@ from llama_index.core import Document
 from llama_index.core.schema import MetadataMode
 from populate_metadata_sqlite import read_metadata_from_db
 
+
 def add_metadata_to_index(documents):
     
     metadata_dict = read_metadata_from_db()
