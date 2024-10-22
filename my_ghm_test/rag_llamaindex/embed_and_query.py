@@ -74,6 +74,7 @@ class RagBasedBot:
         
         #add a parameter with the metadata provider and populate the metadata
         #******
+        add_metadata_to_index(documents)
         
         self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=150)
         self.index.storage_context.persist(persist_dir=self.db_path)
