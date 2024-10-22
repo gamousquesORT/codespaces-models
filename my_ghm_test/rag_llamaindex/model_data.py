@@ -1,5 +1,5 @@
 from enum import Enum
-import sys, os
+import os
 from llama_index.llms.azure_inference import AzureAICompletionsModel
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
