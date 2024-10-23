@@ -78,11 +78,11 @@ class RagBasedBot:
             return None
     
     def index_data(self, rec_flag: bool = False):
-        documents = SimpleDirectoryReader(self.path_to_documents, recursive=rec_flag).load_data()
+        documents = SimpleDirectoryReader(self.path_to_documents, filename_as_id=True, recursive=rec_flag).load_data()
         
         self.metadata_dict = read_metadata_from_db()
         for doc in documents:
-            doc.metadata = self.get_metadata(doc.text)
+            doc.metadata = self.get_metadata(doc.doc_id)
         #add a parameter with the metadata provider and populate the metadata
         #******
         
