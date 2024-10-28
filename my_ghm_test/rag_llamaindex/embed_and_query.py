@@ -12,8 +12,10 @@ import chromadb
 import logging
 import sys
 from typing import List, Dict, Any
+from pathlib import Path
 from model_data import Model
 from populate_metadata_sqlite import read_metadata_from_db
+
 class OperationMode(Enum):
     INGEST = "ingest"
     RETRIEVE = "retrieve"
@@ -71,18 +73,25 @@ class RagBasedBot:
         self.db_client = chromadb.PersistentClient(path=self.db_path)
         self.db_client.delete_collection("quickstart")
 
-    def get_metadata(self, file_path:str):
-        if file_path in self.metadata_dict:
-            return self.metadata_dict[file_path]
-        else:
-            return None
+    def get_metadata_associated_to_element_name(self, search_key:str, search_name_value:str) -> Dict[str, Any]:
+        element_name = Path(search_name_value).name
+        for d in  self.metadata_dict:
+            target_element = Path(d.get(search_key)).name
+            if target_element == element_name:
+                return d
+        return None
+
     
     def index_data(self, rec_flag: bool = False):
         documents = SimpleDirectoryReader(self.path_to_documents, filename_as_id=True, recursive=rec_flag).load_data()
         
         self.metadata_dict = read_metadata_from_db()
         for doc in documents:
-            doc.metadata = self.get_metadata(doc.doc_id)
+            item_metadata = self.get_metadata_associated_to_element_name('internal_source_URL', doc.doc_id)
+            if item_metadata != None:
+                doc.metadata = item_metadata
+                
+                
         #add a parameter with the metadata provider and populate the metadata
         #******
         
