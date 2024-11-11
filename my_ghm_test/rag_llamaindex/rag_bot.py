@@ -23,6 +23,7 @@ def main():
     
     query_model = Model(ModelRole.QUERY, "gpt-4o-mini")
     embedding_model = EmbedderModelOpenAI(model="text-embedding-3-large")
+
     bot = RagBasedBot(mode=OperationMode.RETRIEVE, data_path=data_path, database_path=data_base_path, model_for_query=query_model, model_for_embedding=embedding_model)
     bot.query_model.reset_token_counts()
     bot.embedding_model.reset_token_counts()
@@ -42,7 +43,7 @@ def main():
     #                     examples=["¿Qué se dicta en diseño de aplicaciones 1 (DA1)?", "¿Qué se dicta en Fundamentos de Ingeniería de Software (FIS)?", "¿Qué es un obligatorio?", "¿Como se aprueba un parcial de una materia?", "¿Que significa el resultado NSP?", "Como aviso de una suplencia docente"],
     #                       clear_btn="Clear",retry_btn=None, undo_btn=None)
     # ui.launch(share=True)
-    
 
+    
 if __name__ == "__main__":
     main()
