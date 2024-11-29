@@ -99,10 +99,25 @@ def read_metadata_from_db() -> Dict[str, Any]:
         
         return metadata_dict
 
+def delete_metadata_from_db():
+    current_directory = os.path.dirname(__file__)
+    db_path = os.path.join(current_directory, "./db")
+    db_file = db_path + "/datasources.db"
+    try:
+        if os.path.exists(db_file):
+            os.remove(db_file)
+            print("Base de datos eliminada exitosamente")
+        else:
+            print("La base de datos no existe")
+    except Exception as e:
+        print(f"Error al eliminar la base de datos: {e}")   
+        
+         
 class DbOperation(Enum):
     SCHEMA = 1
     POPULATE = 2
     READ = 3
+    DROP = 4
    
 def main():
     while True:
@@ -113,7 +128,7 @@ def main():
             continue
         
         op = int(op)
-        if op < 0 or op > 3:
+        if op < 0 or op > 4:
             print("\n Opción inválida")
             continue
         
@@ -126,6 +141,8 @@ def main():
             add_metadata()
         elif op == DbOperation.READ.value:
             read_metadata_from_db()
+        elif op == DbOperation.DROP.value:
+            delete_metadata_from_db()
 
 if __name__ == "__main__":
     main()
