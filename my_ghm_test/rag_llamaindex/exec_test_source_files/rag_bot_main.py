@@ -1,5 +1,5 @@
 from embed_and_query import RagBasedBot, OperationMode
-from model_data import Model, EmbedderModelOpenAI, ModelRole
+from my_ghm_test.rag_llamaindex.model import Model, EmbedderModelOpenAI, ModelRole
 import os
 import gradio as gr
 

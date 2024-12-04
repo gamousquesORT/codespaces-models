@@ -80,3 +80,6 @@ https://www.sqlite.org/datatype3.html
 
 Chunking
 https://www.llamaindex.ai/blog/evaluating-the-ideal-chunk-size-for-a-rag-system-using-llamaindex-6207e5d3fec5
+
+Metadata en RAG
+https://medium.com/@sandyshah1990/exploring-rag-implementation-with-metadata-filters-llama-index-3c6c08a83428

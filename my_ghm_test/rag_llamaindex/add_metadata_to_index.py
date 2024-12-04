@@ -1,6 +1,6 @@
 from llama_index.core import Document
 from llama_index.core.schema import MetadataMode
-from populate_metadata_sqlite import read_metadata_from_db
+from my_ghm_test.rag_llamaindex.exec_test_source_files.populate_metadata_sqlite import read_metadata_from_db
 
 
 def add_metadata_to_index(documents):

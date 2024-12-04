@@ -13,8 +13,8 @@ import logging
 import sys
 from typing import List, Dict, Any
 from pathlib import Path
-from model_data import Model
-from populate_metadata_sqlite import read_metadata_from_db
+from model import Model
+from exec_test_source_files.populate_metadata_sqlite import read_metadata_from_db
 
 class OperationMode(Enum):
     INGEST = "ingest"
@@ -87,15 +87,17 @@ class RagBasedBot:
         
         self.metadata_dict = read_metadata_from_db()
         for doc in documents:
-            item_metadata = self.get_metadata_associated_to_element_name('internal_source_URL', doc.doc_id)
+            item_metadata = self.get_metadata_associated_to_element_name('internal_source_URL', doc.metadata['file_name'])
             if item_metadata != None:
-                doc.metadata = item_metadata
-                
-                
-        #add a parameter with the metadata provider and populate the metadata
-        #******
-        
-        
+                doc.metadata.update(item_metadata)
+                # excluir metadata 
+                # filepath
+                #  internal_source_URL
+                # File_name
+                doc.excluded_embed_metadata_keys.append('filepath')
+                doc.excluded_embed_metadata_keys.append('internal_source_URL')
+                doc.excluded_embed_metadata_keys.append('File_name')
+
         self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=250)
         self.index.storage_context.persist(persist_dir=self.db_path)
              

@@ -5,9 +5,16 @@ from datetime import datetime
 from typing import List, Dict, Any
 
 
-def create_metadata_schema():
+def set_current_work_folder():
+    global db_path
+    global current_directory
+    
     current_directory = os.path.dirname(__file__)
-    db_path = os.path.join(current_directory, "./db")
+    db_path = os.path.join(current_directory, "../db")
+        
+def create_metadata_schema():
+    set_current_work_folder()
+
     db_file = db_path + "/datasources.db"
 
     connection = sqlite3.connect(db_file)
@@ -39,8 +46,8 @@ def create_metadata_schema():
         print("Record inserted successfully!")
 
 def add_metadata():
-    current_directory = os.path.dirname(__file__)
-    db_path = os.path.join(current_directory, "./db")
+    set_current_work_folder()
+    
     db_file = db_path + "/datasources.db"
     today = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     data_path = os.path.join(current_directory, "./DataSources/Catedra")
@@ -74,8 +81,7 @@ def add_metadata():
         print("Record inserted successfully!")
         
 def read_metadata_from_db() -> Dict[str, Any]:
-    current_directory = os.path.dirname(__file__)
-    db_path = os.path.join(current_directory, "./db")
+    set_current_work_folder()
     db_file = db_path + "/datasources.db"
 
     with sqlite3.connect(db_file) as connection:
@@ -100,8 +106,7 @@ def read_metadata_from_db() -> Dict[str, Any]:
         return metadata_dict
 
 def delete_metadata_from_db():
-    current_directory = os.path.dirname(__file__)
-    db_path = os.path.join(current_directory, "./db")
+    set_current_work_folder()
     db_file = db_path + "/datasources.db"
     try:
         if os.path.exists(db_file):

@@ -1,5 +1,5 @@
 from embed_and_query import RagBasedBot, OperationMode
-from model_data import EmbedderModelOpenAI
+from model import EmbedderModelOpenAI
 import os
 
 def main():
