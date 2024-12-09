@@ -64,6 +64,8 @@ class EmbedderModelOpenAI(Model):
             api_key=self.llm_api_key,api_base=self.llm_api_url, model=self.model)
         Settings.embed_model = self.embed_model
         Settings._callback_manager = CallbackManager([token_counter])
+        Settings.chunk_size = 512
+        Settings.chunk_overlap = 50
 
     def get_token_count(self) -> int:
        return token_counter.embedding_token_counts

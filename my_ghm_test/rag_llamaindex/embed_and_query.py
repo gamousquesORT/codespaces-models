@@ -81,8 +81,10 @@ class RagBasedBot:
                 return d
         return None
 
-    
+
+
     def index_data(self, rec_flag: bool = False):
+        total_document_size = 0;
         documents = SimpleDirectoryReader(self.path_to_documents, filename_as_id=True, recursive=rec_flag).load_data()
         
         self.metadata_dict = read_metadata_from_db()
@@ -97,7 +99,13 @@ class RagBasedBot:
                 doc.excluded_embed_metadata_keys.append('filepath')
                 doc.excluded_embed_metadata_keys.append('internal_source_URL')
                 doc.excluded_embed_metadata_keys.append('File_name')
-
+                
+                # create a record with the file data in cost db
+                document_size = os.path.getsize(doc.metadata['file_name'])
+                
+                total_document_size += document_size
+                
+                
         self.index = VectorStoreIndex.from_documents(documents, self.storage_context, insert_batch_size=250)
         self.index.storage_context.persist(persist_dir=self.db_path)
              

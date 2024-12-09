@@ -1,5 +1,5 @@
 from embed_and_query import RagBasedBot, OperationMode
-from my_ghm_test.rag_llamaindex.model import EmbedderModelOpenAI
+from model import EmbedderModelOpenAI
 import os
 
 def main():
